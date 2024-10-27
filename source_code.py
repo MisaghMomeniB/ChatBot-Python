@@ -62,3 +62,37 @@ def get_answer_for_question(question: str, knowledge_base: Dict) -> Optional[str
         if q["question"] == question:  # Check if the question matches
             return q["answer"]  # Return the corresponding answer
     return None  # Return None if the question is not found
+
+def chat_bot():
+    """
+    Main chatbot function for user interaction.
+
+    This function handles user input, matches questions, retrieves answers,
+    and allows the user to teach the chatbot new information.
+    """
+    knowledge_base = load_knowledge_base('knowledge_base.json')  # Load the knowledge base from the file
+    
+    while True:
+        user_input = input('You: ')  # Prompt user for input
+        
+        if user_input.lower() == 'quit':  # Check if the user wants to exit
+            break  # Exit the loop
+        
+        # Extract questions from the knowledge base for matching
+        question_list = [q["question"] for q in knowledge_base["question"]]
+        best_match = find_best_match(user_input, question_list)  # Find the best match for the user's question
+        
+        if best_match:
+            answer = get_answer_for_question(best_match, knowledge_base)  # Retrieve the answer
+            if answer:
+                print(f'Bot: {answer}')  # Output the answer to the user
+            else:
+                print('Bot: I found a match, but I don\'t have an answer for it.')
+        else:
+            print('Bot: I don\'t know the answer. Can you teach me?')
+            new_answer = input('Type the answer or "skip" to skip: ')  # Prompt for a new answer
+            
+            if new_answer.lower() != 'skip':  # Check if the user wants to provide an answer
+                knowledge_base["question"].append({"question": user_input, "answer": new_answer})  # Add new question and answer
+                save_knowledge_base('knowledge_base.json', knowledge_base)  # Save the updated knowledge base
+                print('Bot: Thank you for teaching me!')  # Acknowledge the new information
