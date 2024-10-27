@@ -46,3 +46,19 @@ def find_best_match(user_question: str, questions: List[str]) -> Optional[str]:
     """
     matches = get_close_matches(user_question, questions, n=1, cutoff=0.6)  # Find the closest match
     return matches[0] if matches else None  # Return the best match or None if no match is found
+
+def get_answer_for_question(question: str, knowledge_base: Dict) -> Optional[str]:
+    """
+    Retrieve the answer for a given question from the knowledge base.
+
+    Args:
+        question (str): The question to search for in the knowledge base.
+        knowledge_base (Dict): The knowledge base containing questions and answers.
+
+    Returns:
+        Optional[str]: The answer corresponding to the question or None if not found.
+    """
+    for q in knowledge_base["question"]:
+        if q["question"] == question:  # Check if the question matches
+            return q["answer"]  # Return the corresponding answer
+    return None  # Return None if the question is not found
