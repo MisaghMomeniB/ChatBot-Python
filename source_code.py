@@ -96,3 +96,6 @@ def chat_bot():
                 knowledge_base["question"].append({"question": user_input, "answer": new_answer})  # Add new question and answer
                 save_knowledge_base('knowledge_base.json', knowledge_base)  # Save the updated knowledge base
                 print('Bot: Thank you for teaching me!')  # Acknowledge the new information
+                
+if __name__ == '__main__':
+    chat_bot()  # Start the chatbot when the script is run
