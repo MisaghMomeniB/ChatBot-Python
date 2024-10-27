@@ -32,3 +32,17 @@ def save_knowledge_base(file_path: str, data: Dict):
     """
     with open(file_path, 'w') as file:
         json.dump(data, file, indent=2)  # Write the data to the file with indentation for readability
+        
+def find_best_match(user_question: str, questions: List[str]) -> Optional[str]:
+    """
+    Find the closest matching question from the knowledge base.
+
+    Args:
+        user_question (str): The question input by the user.
+        questions (List[str]): A list of questions from the knowledge base.
+
+    Returns:
+        Optional[str]: The closest matching question or None if no match is found.
+    """
+    matches = get_close_matches(user_question, questions, n=1, cutoff=0.6)  # Find the closest match
+    return matches[0] if matches else None  # Return the best match or None if no match is found
