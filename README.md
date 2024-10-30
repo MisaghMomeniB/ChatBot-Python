@@ -4,10 +4,10 @@ You Are Here to Give the Necessary Training and Tips So That You Can Create a Si
 
 # Things We Want to Check Together 😉
 - [What is a ChatBot?](https://github.com/MisaghMomeniB/ChatBot-Python?tab=readme-ov-file#what-is-a-chatbot)
-- [What Are the Prerequisites?](what-are-the-prerequisites?)
-- [Will It Be Expandable?](will-it-be-expandable?)
-- [Line by Line Code Analysis](line-by-line-code-analysis)
-- [Are There Going to Be New Updates?](Are-There-Going-to-Be-New-Updates?)
+- [What Are the Prerequisites?](https://github.com/MisaghMomeniB/ChatBot-Python?tab=readme-ov-file#what-are-the-prerequisites)
+- [Will It Be Expandable?](https://github.com/MisaghMomeniB/ChatBot-Python?tab=readme-ov-file#will-it-be-expandable)
+- [Line by Line Code Analysis](https://github.com/MisaghMomeniB/ChatBot-Python?tab=readme-ov-file#line-by-line-code-analysis)
+- [Are There Going to Be New Updates?](https://github.com/MisaghMomeniB/ChatBot-Python?tab=readme-ov-file#are-there-going-to-be-new-updates)
 
 # What is a ChatBot?
 A Chatbot is a Software Application That Interacts With Users Through Messaging or Voice, Responding to Questions, Requests, and Conversations. Chatbots Are Used Across Various Platforms, Such as Websites, Apps, and Messaging Platforms Like Whatsapp, Telegram, and Messenger. The Primary Goal of Chatbots is to Create an Interactive and User-friendly Experience, Often Replacing or Assisting Human Services.
