@@ -3,7 +3,7 @@
 You Are Here to Give the Necessary Training and Tips So That You Can Create a Simple Chatbot Based on Your Data.**
 
 # Things We Want to Check Together 😉
-- [What is a ChatBot?](what-is-a-chatbot?)
+- [What is a ChatBot?]([what-is-a-chatbot?](https://github.com/MisaghMomeniB/ChatBot-Python?tab=readme-ov-file#what-is-a-chatbot))
 - [What Are the Prerequisites?](what-are-the-prerequisites?)
 - [Will It Be Expandable?](will-it-be-expandable?)
 - [Line by Line Code Analysis](line-by-line-code-analysis)
