@@ -1,36 +1,8 @@
-# ChatBot Python 🐍
-**Hello, I Hope You Are Well
-You Are Here to Give the Necessary Training and Tips So That You Can Create a Simple Chatbot Based on Your Data.**
+__Hello My Friend 👋🏻__ <br>
+__I'm Misagh and I'm Glad You're Here 😉__
 
-# Things We Want to Check Together 😉
-- [What is a ChatBot?](https://github.com/MisaghMomeniB/ChatBot-Python?tab=readme-ov-file#what-is-a-chatbot)
-- [What Are the Prerequisites?](https://github.com/MisaghMomeniB/ChatBot-Python?tab=readme-ov-file#what-are-the-prerequisites)
-- [Will It Be Expandable?](https://github.com/MisaghMomeniB/ChatBot-Python?tab=readme-ov-file#will-it-be-expandable)
-- [Line by Line Code Analysis](https://github.com/MisaghMomeniB/ChatBot-Python?tab=readme-ov-file#line-by-line-code-analysis)
-- [Are There Going to Be New Updates?](https://github.com/MisaghMomeniB/ChatBot-Python?tab=readme-ov-file#are-there-going-to-be-new-updates)
-
-# What is a ChatBot?
-A Chatbot is a Software Application That Interacts With Users Through Messaging or Voice, Responding to Questions, Requests, and Conversations. Chatbots Are Used Across Various Platforms, Such as Websites, Apps, and Messaging Platforms Like Whatsapp, Telegram, and Messenger. The Primary Goal of Chatbots is to Create an Interactive and User-friendly Experience, Often Replacing or Assisting Human Services.
-
-Chatbots Are Generally Categorized Into Two Main Types:
-
-Rule-based Chatbots: These Chatbots Operate Based on a Set of Predefined Rules and Scenarios, Usually Offering Limited Responses. They Are Suitable for Situations That Require Fixed and Predictable Responses, Such as Answering Frequently Asked Questions or Handling Simple Requests.
-
-AI-based Chatbots: These Chatbots Use Machine Learning Algorithms and Natural Language Processing (Nlp) to Understand and Respond to More Complex Conversations. They Are Capable of Understanding Natural Language and Adapting to Diverse Interactions, Providing Varied and Optimized Responses. For Example, Ai-powered Chatbots Like Chatgpt Use Artificial Intelligence to Answer User Questions and Hold Natural Conversations.
-
-Applications of Chatbots:
-Customer Support: Answering User Questions and Addressing Issues 24/7.
-Consulting Services: Providing Guidance and Advice in Fields Like Healthcare, Finance, and Psychology.
-Sales and Marketing: Assisting Users in Finding Suitable Products or Services and Offering Special Recommendations.
-Education: Responding to Student Inquiries and Guiding Them Through Academic Topics.
-
-# What Are the Prerequisites?
-You Need to Be Familiar With the Python Programming Language to Be Able to Create an Ai Chatbot Using Python's Powerful and Comprehensive Libraries. There Are Many Libraries Available for Building an Ai Chatbot, but I've Decided to Start With the Simplest Approach for Now, So That We Can Explore Other Options in the Future.
-
-All That’s Required is a Basic Understanding of Python So That You Can Comprehend the Code. We’ll Analyze Each Line of Code Step by Step, Making This a General Tutorial.
-
-# Will It Be Expandable?
-Definitely! Every Day, by Studying Extensively About Artificial Intelligence and the Functionality of Chatbots, I Will Provide You With Better and More Interesting Versions. I Will Also Expand This Project. In the Future, I Will Work More With Different Libraries and Provide Additional Explanations.
+# ChatBot-Python🐍
+I Wrote a Simple __ChatBot__ That Allows You to Ask Questions and Get Answers Based on the Data You Provide. You Can Update It and Add Good Features to It.
 
 # Line by Line Code Analysis
 
@@ -215,5 +187,3 @@ def chat_bot():
 ``
 if __name__ == '__main__':`` <br>
    `` chat_bot()  # Start the chatbot when the script is`` <br>
-# Are There Going to Be New Updates?
-**Definitely, This Project is Going to Be Updated and New Things Will Be Added to It**
