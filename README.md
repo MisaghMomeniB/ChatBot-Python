@@ -1,189 +1,139 @@
-__Hello My Friend 👋🏻__ <br>
-__I'm Misagh and I'm Glad You're Here 😉__
-
-# ChatBot-Python🐍
-I Wrote a Simple __ChatBot__ That Allows You to Ask Questions and Get Answers Based on the Data You Provide. You Can Update It and Add Good Features to It.
-
-# Line by Line Code Analysis
-
-### Import Statements
-
+### Importing Required Modules
 ```python
 import json
 from difflib import get_close_matches
 from typing import Dict, List, Optional
 ```
-
-1. **`import json`**: This module is used for working with JSON data. It allows for encoding (serializing) Python objects into JSON format and decoding (deserializing) JSON back into Python objects.
-2. **`from difflib import get_close_matches`**: This function is used to find the closest matches to a string in a list, which is particularly useful for matching user input with predefined questions in the knowledge base.
-3. **`from typing import Dict, List, Optional`**: These are type hints that provide information about the types of variables and function return types, enhancing code readability and enabling better static analysis.
+- `json`: Used to load and save the knowledge base in JSON format.
+- `difflib.get_close_matches`: Helps find the closest matching question to the user’s input.
+- `typing`: Provides type hints like `Dict`, `List`, and `Optional` for clearer function definitions.
 
 ### Loading the Knowledge Base
-
 ```python
 def load_knowledge_base(file_path: str) -> Dict:
-    """
-    Load the knowledge base from a JSON file.
-    
-    Args:
-        file_path (str): The path to the JSON file containing the knowledge base.
-    
-    Returns:
-        Dict: A dictionary containing the knowledge base.
-    """
+```
+- This function loads the knowledge base from a JSON file. It takes `file_path`, a string representing the file’s location, and returns a dictionary.
+
+```python
     try:
         with open(file_path, 'r') as file:
-            return json.load(file)  # Load and return the JSON data as a dictionary
+            return json.load(file)
+```
+- Opens the specified file in read mode and loads its contents as a dictionary.
+
+```python
     except FileNotFoundError:
         print(f"Error: File '{file_path}' not found. Starting with an empty knowledge base.")
-        return {"question": []}  # Return an empty knowledge base if the file is not found
+        return {"question": []}
+```
+- If the file is not found, an error message is shown, and an empty knowledge base (dictionary with an empty `question` list) is returned.
+
+```python
     except json.JSONDecodeError:
         print(f"Error: File '{file_path}' is not a valid JSON. Starting with an empty knowledge base.")
-        return {"question": []}  # Return an empty knowledge base if JSON is invalid
+        return {"question": []}
 ```
-
-- **Purpose**: This function loads the knowledge base from a specified JSON file. If the file does not exist or contains invalid JSON, it initializes an empty knowledge base.
-- **Parameters**: 
-  - `file_path`: A string representing the file path of the JSON file.
-- **Returns**: A dictionary containing the knowledge base.
-- **Functionality**:
-  - It uses a `try-except` block to handle potential errors:
-    - **`FileNotFoundError`**: Catches the error if the file does not exist and initializes an empty knowledge base.
-    - **`json.JSONDecodeError`**: Catches errors in case the JSON is invalid, also initializing an empty knowledge base.
+- If the JSON file is invalid, another error message is shown, and an empty knowledge base is returned.
 
 ### Saving the Knowledge Base
-
 ```python
 def save_knowledge_base(file_path: str, data: Dict):
-    """
-    Save the knowledge base to a JSON file.
-
-    Args:
-        file_path (str): The path to the JSON file where the knowledge base will be saved.
-        data (Dict): The knowledge base data to save.
-    """
-    with open(file_path, 'w') as file:
-        json.dump(data, file, indent=2)  # Write the data to the file with indentation for readability
 ```
+- This function saves the knowledge base to a JSON file, accepting the file path and the data to save.
 
-- **Purpose**: This function saves the current knowledge base back to the specified JSON file.
-- **Parameters**: 
-  - `file_path`: A string indicating where to save the JSON file.
-  - `data`: A dictionary representing the knowledge base data.
-- **Functionality**:
-  - The `with open(file_path, 'w')` statement opens the file in write mode.
-  - `json.dump(data, file, indent=2)` writes the dictionary `data` to the file in JSON format, with an indentation of 2 spaces for better readability.
+```python
+    with open(file_path, 'w') as file:
+        json.dump(data, file, indent=2)
+```
+- Opens the specified file in write mode and saves the data in JSON format with indentation for readability.
 
-### Finding the Best Match
-
+### Finding the Best Match for a User Question
 ```python
 def find_best_match(user_question: str, questions: List[str]) -> Optional[str]:
-    """
-    Find the closest matching question from the knowledge base.
-
-    Args:
-        user_question (str): The question input by the user.
-        questions (List[str]): A list of questions from the knowledge base.
-
-    Returns:
-        Optional[str]: The closest matching question or None if no match is found.
-    """
-    matches = get_close_matches(user_question, questions, n=1, cutoff=0.6)  # Find the closest match
-    return matches[0] if matches else None  # Return the best match or None if no match is found
 ```
+- This function searches for the best matching question from the knowledge base, using `user_question` as input and `questions`, a list of known questions, as potential matches. It returns the closest match or `None` if no close match is found.
 
-- **Purpose**: This function attempts to find the closest matching question to the user's input from a list of predefined questions in the knowledge base.
-- **Parameters**:
-  - `user_question`: A string containing the question asked by the user.
-  - `questions`: A list of strings representing the questions stored in the knowledge base.
-- **Returns**: The closest matching question or `None` if no match is found.
-- **Functionality**:
-  - It uses `get_close_matches` from the `difflib` module:
-    - `n=1`: Specifies that only the closest match should be returned.
-    - `cutoff=0.6`: Sets a similarity threshold; only matches with a similarity score of 0.6 or higher will be considered.
-  - The function returns the closest match if found; otherwise, it returns `None`.
+```python
+    matches = get_close_matches(user_question, questions, n=1, cutoff=0.6)
+    return matches[0] if matches else None
+```
+- `get_close_matches` returns a list of matches with a minimum similarity ratio of 0.6. If a match is found, it returns the first match; otherwise, it returns `None`.
 
-### Retrieving the Answer
-
+### Retrieving the Answer for a Question
 ```python
 def get_answer_for_question(question: str, knowledge_base: Dict) -> Optional[str]:
-    """
-    Retrieve the answer for a given question from the knowledge base.
-
-    Args:
-        question (str): The question to search for in the knowledge base.
-        knowledge_base (Dict): The knowledge base containing questions and answers.
-
-    Returns:
-        Optional[str]: The answer corresponding to the question or None if not found.
-    """
-    for q in knowledge_base["question"]:
-        if q["question"] == question:  # Check if the question matches
-            return q["answer"]  # Return the corresponding answer
-    return None  # Return None if the question is not found
 ```
-
-- **Purpose**: This function retrieves the answer corresponding to a given question from the knowledge base.
-- **Parameters**:
-  - `question`: A string representing the question for which the answer is to be retrieved.
-  - `knowledge_base`: The dictionary containing the knowledge base data.
-- **Returns**: The answer if found; otherwise, `None`.
-- **Functionality**:
-  - It iterates through the list of questions in the knowledge base and checks if any match the input question.
-  - If a match is found, it returns the corresponding answer; if no match is found after iterating through all questions, it returns `None`.
-
-### Main Chatbot Function
+- This function takes a `question` and searches for it in the `knowledge_base` dictionary to retrieve its answer.
 
 ```python
-def chat_bot():
-    """
-    Main chatbot function for user interaction.
+    for q in knowledge_base["question"]:
+        if q["question"] == question:
+            return q["answer"]
+    return None
+```
+- Iterates over each question-answer pair in the knowledge base and returns the answer if the question matches. If no match is found, it returns `None`.
 
-    This function handles user input, matches questions, retrieves answers,
-    and allows the user to teach the chatbot new information.
-    """
-    knowledge_base = load_knowledge_base('knowledge_base.json')  # Load the knowledge base from the file
-    
+### Main Chatbot Function
+```python
+def chat_bot():
+```
+- This function manages user interaction and handles input, matching, answering, and teaching new information.
+
+```python
+    knowledge_base = load_knowledge_base('knowledge_base.json')
+```
+- Loads the knowledge base from the file `knowledge_base.json`.
+
+#### Main Chat Loop
+```python
     while True:
-        user_input = input('You: ')  # Prompt user for input
-        
-        if user_input.lower() == 'quit':  # Check if the user wants to exit
-            break  # Exit the loop
-        
-        # Extract questions from the knowledge base for matching
+        user_input = input('You: ')
+```
+- Prompts the user to enter a question.
+
+```python
+        if user_input.lower() == 'quit':
+            break
+```
+- Exits the loop if the user types `quit`.
+
+#### Matching User Input to Known Questions
+```python
         question_list = [q["question"] for q in knowledge_base["question"]]
-        best_match = find_best_match(user_input, question_list)  # Find the best match for the user's question
-        
+        best_match = find_best_match(user_input, question_list)
+```
+- Extracts questions from the knowledge base and searches for the best match to the user’s input.
+
+#### Providing an Answer
+```python
         if best_match:
-            answer = get_answer_for_question(best_match, knowledge_base)  # Retrieve the answer
+            answer = get_answer_for_question(best_match, knowledge_base)
             if answer:
-                print(f'Bot: {answer}')  # Output the answer to the user
+                print(f'Bot: {answer}')
             else:
                 print('Bot: I found a match, but I don\'t have an answer for it.')
+```
+- If a match is found, the function retrieves and prints the answer. If the answer is missing, a message is shown.
+
+#### Learning a New Answer
+```python
         else:
             print('Bot: I don\'t know the answer. Can you teach me?')
-            new_answer = input('Type the answer or "skip" to skip: ')  # Prompt for a new answer
-            
-            if new_answer.lower() != 'skip':  # Check if the user wants to provide an answer
-                knowledge_base["question"].append({"question": user_input, "answer": new_answer})  # Add new question and answer
-                save_knowledge_base('knowledge_base.json', knowledge_base)  # Save the updated knowledge base
-                print('Bot: Thank you for teaching me!')  # Acknowledge the new information
+            new_answer = input('Type the answer or "skip" to skip: ')
 ```
+- If no match is found, the chatbot prompts the user to provide an answer or skip.
 
-- **Purpose**: This is the main function of the chatbot that handles user interaction, retrieves answers from the knowledge base, and allows the user to teach the chatbot new information.
-- **Functionality**:
-  - **Loading Knowledge Base**: The knowledge base is loaded from a JSON file.
-  - **User Interaction Loop**: A `while True` loop is used to continuously prompt the user for input:
-    - If the user inputs "quit", the loop breaks, and the program ends.
-    - It extracts the list of questions from the knowledge base for matching purposes.
-    - The function then finds the best match for the user's input using `find_best_match`.
-  - **Matching Process**:
-    - If a match is found, it retrieves the corresponding answer using `get_answer_for_question` and prints it.
-    - If no match is found, the chatbot prompts the user to provide an answer for the new question. If the user provides an answer (not skipping), it appends this new question-answer pair to the knowledge base and saves it back to the JSON file using `save_knowledge_base`.
-    - It acknowledges the user for teaching it new information.
+```python
+            if new_answer.lower() != 'skip':
+                knowledge_base["question"].append({"question": user_input, "answer": new_answer})
+                save_knowledge_base('knowledge_base.json', knowledge_base)
+                print('Bot: Thank you for teaching me!')
+```
+- If the user provides a new answer, the chatbot adds it to the knowledge base and saves it to the file, then thanks the user.
 
-### Main Script Execution
-
-``
-if __name__ == '__main__':`` <br>
-   `` chat_bot()  # Start the chatbot when the script is`` <br>
+### Running the Chatbot
+```python
+if __name__ == '__main__':
+    chat_bot()
+```
+- When the script is run, the `chat_bot()` function starts the chatbot application.
